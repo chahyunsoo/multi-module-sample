@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import java.util.UUID
 
 @RestController
 class UserController(
@@ -20,7 +21,7 @@ class UserController(
 
     @GetMapping("v1/users/{userId}")
     fun findUser(
-        @PathVariable userId: Long
+        @PathVariable userId: UUID
     ): UserResponse {
         return UserResponse(userService.read(userId))
     }

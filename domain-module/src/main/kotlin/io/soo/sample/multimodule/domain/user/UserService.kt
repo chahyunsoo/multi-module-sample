@@ -1,6 +1,7 @@
 package io.soo.sample.multimodule.domain.user
 
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class UserService(
@@ -11,7 +12,7 @@ class UserService(
         return userWriter.add(name)
     }
 
-    fun read(id: Long): User {
+    fun read(id: UUID): User {
         return userReader.read(id)
     }
 }
