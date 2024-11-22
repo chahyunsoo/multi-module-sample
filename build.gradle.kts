@@ -1,8 +1,8 @@
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25" apply false
-    id("org.springframework.boot") version "3.4.0" apply false
-    id("io.spring.dependency-management") version "1.1.6" apply false
+    kotlin("jvm")
+    kotlin("plugin.spring") apply false
+    id("org.springframework.boot") apply false
+    id("io.spring.dependency-management")
 }
 
 java {
@@ -11,9 +11,12 @@ java {
     }
 }
 
+val projectGroup: String by project
+val applicationVersion: String by project
+
 allprojects {
-    group = "io.soo.sample"
-    version = "0.0.1-SNAPSHOT"
+    group = projectGroup
+    version = applicationVersion
 
     repositories {
         mavenCentral()
@@ -25,6 +28,13 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
+
+    dependencyManagement {
+        val springCloudDependenciesVersion: String by project
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudDependenciesVersion")}")
+        }
+    }
 
     dependencies {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
