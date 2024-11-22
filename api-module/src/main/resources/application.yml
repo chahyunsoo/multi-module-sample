@@ -4,10 +4,10 @@ spring.profiles.active: local
 spring:
   config:
     import:
-      - monitoring.yml
-      - logging.yml
-      - db-core.yml
-      - client-example.yml
+      - optional:classpath:monitoring.yml
+      - optional:classpath:logging.yml
+      - optional:classpath:db-core.yml
+
   web.resources.add-mappings: false
 
 server:
